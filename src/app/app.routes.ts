@@ -12,14 +12,14 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./modules/auth/login/login.component')
-        .then(m => m.LoginComponent)
+      .then(m => m.LoginComponent)
   },
 
   {
     path: 'register',
     loadComponent: () =>
       import('./modules/auth/register/register.component')
-        .then(m => m.RegisterComponent)
+      .then(m => m.RegisterComponent)
   }
 
 ];

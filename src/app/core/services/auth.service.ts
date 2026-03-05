@@ -1,52 +1,62 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { jwtDecode } from 'jwt-decode';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  private apiUrl = 'https://localhost:7036/api/auth';
 
-  login(data: any) {
-    return this.http.post(`${environment.apiUrl}/auth/login`, data);
-  }
+  constructor(private http: HttpClient) {}
 
-  register(data: any) {
-    return this.http.post(`${environment.apiUrl}/auth/register`, data);
-  }
+ login(data:any){
+  return this.http.post(
+    `${this.apiUrl}/login`,
+    data,
+    { responseType: 'text' }
+  );
+}
+register(data:any):Observable<any>{
+  return this.http.post(`${this.apiUrl}/register`, data, {
+    responseType: 'text'
+  });
+}
 
-  saveToken(token: string) {
+
+  saveToken(token:string){
     localStorage.setItem('token', token);
   }
 
-  getToken() {
+  getToken(){
     return localStorage.getItem('token');
   }
 
-  logout() {
+  logout(){
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
   }
 
-  getUserRole(): string | null {
+  getUserRole(): string {
 
     const token = this.getToken();
 
-    if (!token) return null;
+    if (!token) return '';
 
-    const decoded: any = jwtDecode(token);
+    try {
 
-    return decoded.role || decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      const payload = JSON.parse(atob(token.split('.')[1]));
+
+      return payload.role ||
+        payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] ||
+        '';
+
+    } catch {
+
+      return '';
+
+    }
+
   }
 
-  isLoggedIn(): boolean {
-    return !!this.getToken();
-  }
 }
