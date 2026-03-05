@@ -1,0 +1,69 @@
+<div class="inventory-container">
+
+  <div class="inventory-header">
+    <h2>Inventory Items</h2>
+
+    <button mat-raised-button color="primary"
+    (click)="add()">
+    Add Item
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="items" class="mat-elevation-z2 full-width-table">
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let item"> {{ item.id }} </td>
+    </ng-container>
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let item"> {{ item.name }} </td>
+    </ng-container>
+
+    <!-- SKU -->
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef> SKU </th>
+      <td mat-cell *matCellDef="let item"> {{ item.sku }} </td>
+    </ng-container>
+
+    <!-- Unit -->
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef> Unit </th>
+      <td mat-cell *matCellDef="let item"> {{ item.unit }} </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+
+      <td mat-cell *matCellDef="let item">
+
+        <button mat-button color="primary"
+        (click)="edit(item)">
+        Edit
+        </button>
+
+        <button
+          mat-stroked-button
+          color="warn"
+          class="action-btn"
+          (click)="delete(item.id)"
+        >
+          Delete
+        </button>
+
+      </td>
+    </ng-container>
+
+    <!-- Header Row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <!-- Data Rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  </table>
+
+</div>
