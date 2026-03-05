@@ -71,13 +71,17 @@ dialogRef.afterClosed()
 .subscribe((result:any)=>{
 
 if(result){
+
 this.vendorService.createVendor(result)
 .subscribe(()=>{
 this.loadVendors()
 })
+
 }
 
 })
+
+
 
 }
 
