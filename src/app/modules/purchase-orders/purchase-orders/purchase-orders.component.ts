@@ -1,54 +1,36 @@
-import { Component,OnInit } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { MatTableModule } from '@angular/material/table'
-import { MatButtonModule } from '@angular/material/button'
-import { MatDialog } from '@angular/material/dialog'
-
-import { PurchaseOrderService } from '../../../core/services/purchase-order.service';
 @Component({
-selector:'app-purchase-orders',
-standalone:true,
-imports:[
-CommonModule,
-MatTableModule,
-MatButtonModule
-],
-templateUrl:'./purchase-orders.component.html'
+  selector: 'app-purchase-orders',
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
+  templateUrl: './purchase-orders.component.html',
+  styleUrls: ['./purchase-orders.component.scss']
 })
-export class PurchaseOrdersComponent implements OnInit{
+export class PurchaseOrdersComponent implements OnInit {
 
-orders:any[]=[]
+  orders:any[] = [];
 
-displayedColumns=[
-'id',
-'vendor',
-'status',
-'totalAmount',
-'actions'
-]
+  constructor(private http: HttpClient) {}
 
-constructor(
-private service:PurchaseOrderService,
-private dialog:MatDialog
-){}
+  ngOnInit(): void {
+    this.loadOrders();
+  }
 
-ngOnInit(){
-this.loadOrders()
-}
+  loadOrders(){
+    this.http.get<any[]>('https://localhost:7036/api/purchase-orders')
+      .subscribe((res:any[])=>{
 
-loadOrders(){
-this.service.getOrders()
-.subscribe(res=>{
-this.orders=res
-})
-}
+        this.orders = res.map((o:any)=>({
+          id: o.id,
+          vendor: o.vendorName || o.vendorId,
+          status: o.status,
+          total: o.totalAmount || 0
+        }))
 
-delete(id:number){
-this.service.deleteOrder(id)
-.subscribe(()=>{
-this.loadOrders()
-})
-}
+      })
+  }
 
 }

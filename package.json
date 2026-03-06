@@ -25,7 +25,7 @@
     "chart.js": "^4.5.1",
     "express": "^5.1.0",
     "jwt-decode": "^4.0.0",
-    "ng2-charts": "^9.0.0",
+    "ng2-charts": "^5.0.4",
     "ngx-spinner": "^21.0.0",
     "ngx-toastr": "^20.0.5",
     "rxjs": "~7.8.0",

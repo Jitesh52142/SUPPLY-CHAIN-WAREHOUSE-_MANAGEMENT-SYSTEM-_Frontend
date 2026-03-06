@@ -1,4 +1,4 @@
-<h2>Dashboard</h2>
+<h2>Analytics Dashboard</h2>
 
 <div class="stats">
 
@@ -8,7 +8,7 @@
 </div>
 
 <div class="card">
-<h3>Vendors</h3>
+<h3>Total Vendors</h3>
 <p>{{dashboard?.totalVendors}}</p>
 </div>
 
@@ -26,8 +26,9 @@
 
 <div class="chart">
 
-<canvas baseChart
-[data]="chartData"
+<canvas
+baseChart
+[data]="stockChart"
 type="bar">
 </canvas>
 

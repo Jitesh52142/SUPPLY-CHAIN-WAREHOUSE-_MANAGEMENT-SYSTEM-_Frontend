@@ -1,41 +1,16 @@
 <h2>Goods Receipt Notes</h2>
 
-<table mat-table [dataSource]="grns">
+<table border="1" width="100%">
+  <tr>
+    <th>ID</th>
+    <th>PO</th>
+    <th>Date</th>
+  </tr>
 
-
-
-<ng-container matColumnDef="id">
-<th mat-header-cell *matHeaderCellDef>ID</th>
-<td mat-cell *matCellDef="let g">{{g.id}}</td>
-</ng-container>
-
-<ng-container matColumnDef="purchaseOrderId">
-<th mat-header-cell *matHeaderCellDef>PO</th>
-<td mat-cell *matCellDef="let g">{{g.purchaseOrderId}}</td>
-</ng-container>
-
-<ng-container matColumnDef="createdDate">
-<th mat-header-cell *matHeaderCellDef>Date</th>
-<td mat-cell *matCellDef="let g">{{g.createdDate}}</td>
-</ng-container>
-
-<ng-container matColumnDef="actions">
-<th mat-header-cell *matHeaderCellDef>Actions</th>
-<td mat-cell *matCellDef="let g">
-
-<button mat-button color="primary" (click)="addItems(g)">
-Add Items
-</button>
-
-<button mat-raised-button color="primary" (click)="createGrn()">
-Create GRN
-</button>
-
-
-</td>
-</ng-container>
-
-<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr *ngFor="let g of grns">
+    <td>{{g.id}}</td>
+    <td>{{g.purchaseOrderId}}</td>
+    <td>{{g.createdAt | date:'medium'}}</td>
+  </tr>
 
 </table>

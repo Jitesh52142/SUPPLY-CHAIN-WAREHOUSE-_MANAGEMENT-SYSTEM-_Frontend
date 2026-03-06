@@ -2,41 +2,14 @@
 
 <h2>SupplyChain</h2>
 
-<a routerLink="/admin/dashboard" routerLinkActive="active">
-  Dashboard
-</a>
+<ul>
 
-<a routerLink="/admin/inventory" routerLinkActive="active">
-  Inventory
-</a>
+<li *ngFor="let item of menu">
+  <a [routerLink]="item.route">
+    {{item.name}}
+  </a>
+</li>
 
-<a routerLink="/admin/vendors" routerLinkActive="active">
-  Vendors
-</a>
-
-<a routerLink="/admin/warehouses" routerLinkActive="active">
-  Warehouses
-</a>
-
-<a routerLink="/admin/purchase-orders" routerLinkActive="active">
-  Purchase Orders
-</a>
-
-<a routerLink="/admin/grn" routerLinkActive="active">
-  GRN
-</a>
-
-<a mat-list-item routerLink="/admin/approvals">
-  Approvals
-</a>
-
-
-<a routerLink="/admin/analytics" routerLinkActive="active">
-  Analytics
-</a>
-
-<a routerLink="/admin/dashboard" routerLinkActive="active">
-  Dashboard
-</a>
+</ul>
 
 </div>

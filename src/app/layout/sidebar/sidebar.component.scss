@@ -1,20 +1,26 @@
 .sidebar{
-width:240px;
+width:220px;
+height:100vh;
 background:#1e293b;
 color:white;
 padding:20px;
-display:flex;
-flex-direction:column;
-gap:12px;
 }
 
-a{
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+margin:15px 0;
+}
+
+.sidebar a{
 color:white;
 text-decoration:none;
-padding:8px;
-border-radius:6px;
+font-size:16px;
 }
 
-a:hover{
-background:#334155;
+.sidebar a:hover{
+color:#3b82f6;
 }

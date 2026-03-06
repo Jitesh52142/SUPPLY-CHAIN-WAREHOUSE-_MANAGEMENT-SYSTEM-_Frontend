@@ -4,31 +4,29 @@ import { HttpClient } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 
 @Component({
-selector:'app-admin-dashboard',
+selector:'app-analytics',
 standalone:true,
 imports:[CommonModule,NgChartsModule],
-templateUrl:'./admin-dashboard.component.html'
+templateUrl:'./analytics.component.html',
+styleUrls:['./analytics.component.scss']
 })
-export class AdminDashboardComponent implements OnInit{
+export class AnalyticsComponent implements OnInit{
 
 dashboard:any
 
-chartData:any={
+stockChart:any={
 labels:[],
-datasets:[
-{
-label:'Stock',
+datasets:[{
 data:[],
-backgroundColor:'#3b82f6'
-}
-]
+label:'Stock Summary'
+}]
 }
 
 constructor(private http:HttpClient){}
 
 ngOnInit(){
 this.loadDashboard()
-this.loadStock()
+this.loadStockSummary()
 }
 
 loadDashboard(){
@@ -38,12 +36,12 @@ this.dashboard=res
 })
 }
 
-loadStock(){
+loadStockSummary(){
 this.http.get<any[]>('https://localhost:7036/api/analytics/stock-summary')
 .subscribe(res=>{
 
-this.chartData.labels=res.map(x=>x.itemName)
-this.chartData.datasets[0].data=res.map(x=>x.quantity)
+this.stockChart.labels=res.map(x=>x.itemName)
+this.stockChart.datasets[0].data=res.map(x=>x.quantity)
 
 })
 }

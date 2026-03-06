@@ -1,0 +1,18 @@
+<h2>Warehouses</h2>
+
+<table border="1" width="100%">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Code</th>
+<th>City</th>
+</tr>
+
+<tr *ngFor="let w of warehouses">
+<td>{{w.id}}</td>
+<td>{{w.name}}</td>
+<td>{{w.code}}</td>
+<td>{{w.city}}</td>
+</tr>
+
+</table>
