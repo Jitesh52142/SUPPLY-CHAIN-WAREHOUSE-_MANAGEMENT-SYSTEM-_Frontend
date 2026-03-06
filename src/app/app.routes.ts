@@ -39,8 +39,22 @@ loadComponent:()=>import('./modules/inventory/inventory/inventory.component')
 path:'vendors',
 loadComponent:()=>import('./modules/vendors/vendors/vendors.component')
 .then(m=>m.VendorsComponent)
-}
-]
-}
+},
+{
+path:'purchase-orders',
+loadComponent:()=>import('./modules/purchase-orders/purchase-orders/purchase-orders.component')
+.then(m=>m.PurchaseOrdersComponent)
+},
+{
+path:'approvals',
+loadComponent:()=>import('./modules/approvals/approvals/approvals.component')
+.then(m=>m.ApprovalsComponent)
+},
 
-];
+// {
+// path:'grn',
+// loadComponent:()=>import('./modules/grn/grn/grn.component')
+// .then(m=>m.GrnComponent)}
+
+
+]}]
